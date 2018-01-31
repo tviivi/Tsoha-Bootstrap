@@ -8,6 +8,10 @@ $routes->get('/listaus', function() {
     AskareController::index();
 });
 
+$routes->post('/lisatty', function() {
+    AskareController::store();
+});
+
 $routes->get('/lisays', function() {
     AskareController::lisays();
 });
@@ -22,4 +26,8 @@ $routes->get('/luokat', function() {
 
 $routes->get('/muokkaus', function() {
     AskareController::muokkaus();
+});
+
+$routes->get('/askare/:id', function($id) {
+    AskareController::yksittainen($id);
 });

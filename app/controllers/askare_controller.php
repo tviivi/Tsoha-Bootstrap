@@ -24,14 +24,20 @@ class AskareController extends BaseController {
       View::make('Askare/muokkaus.html');
   }
   
+  public static function yksittainen($id){
+      View::make('Askare/yksittainen.html');
+  }
+  
   public static function store(){
     // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
     $params = $_POST;
     // Alustetaan uusi Game-luokan olion käyttäjän syöttämillä arvoilla
     $askare = new Askare(array(
+      'kayttaja_id' => 1,
       'nimi' => $params['nimi'],
       'tarkeys_aste' => $params['tarkeys_aste'],
-      'luokka' => $params['luokka']
+      'luokka' => $params['luokka'],
+      'suoritus' => $params['suoritus']
     ));
 
     Kint::dump($params);
@@ -39,6 +45,6 @@ class AskareController extends BaseController {
     $askare->save();
 
     // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
-    // Redirect::to('/listaus' . $askare->id, array('message' => 'Peli on lisätty kirjastoosi!'));
+    Redirect::to('/listaus', array('message' => 'Askare on lisätty kirjastoosi!'));
   }
 }

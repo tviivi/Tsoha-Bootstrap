@@ -1,27 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Lisää uusi askare</h1>
+<h1>Lisää uusi askare</h1>
 
-  <form method="post" action="{{base_path}}/listaus">
-    
+<form method="post" action="{{base_path}}/lisatty">
+
     <div class="form-group">
-      <label>Askare</label>
-      <input type="text" name="nimi" class="form-control">
-    </div>
-      
+        <label>Kayttajan id</label>
+        <input type="text" name="kayttaja_id" class="form-control">
+    </div>  
+
     <div class="form-group">
-      <label>Tärkeysaste</label>
-      <input type="text" name="tarkeys_aste" class="form-control">
+        <label>Askare</label>
+        <input type="text" name="nimi" class="form-control">
     </div>
-      
+
     <div class="form-group">
-      <label>Luokka</label>
-      <input type="text" name="luokka" class="form-control">
+        <label>Tärkeysaste</label>
+        <input type="text" name="tarkeys_aste" class="form-control">
     </div>
-      
+
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Luo uusi askare</button>
+        <label>Luokka</label>
+        <input type="text" name="luokka" class="form-control">
     </div>
-      
-  </form>
+
+    <div class="form-group">
+        <label>Suoritus (tehty vai ei tehty)</label>
+        <input type="text" name="suoritus" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Luo uusi askare</button>
+    </div>
+
+</form>
 {% endblock %}
