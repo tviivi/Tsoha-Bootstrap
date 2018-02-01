@@ -2,9 +2,9 @@
 
 class AskareController extends BaseController {
     public static function index(){
-    // Haetaan kaikki pelit tietokannasta
+    // Haetaan kaikki askareet tietokannasta
     $askareet = Askare::all();
-    // Renderöidään views/game kansiossa sijaitseva tiedosto index.html muuttujan $games datalla
+    // Renderöidään views/askare kansiossa sijaitseva tiedosto listaus.html muuttujan $askare datalla
     View::make('Askare/listaus.html', array('askareet' => $askareet));
   }
   
@@ -31,7 +31,7 @@ class AskareController extends BaseController {
   public static function store(){
     // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
     $params = $_POST;
-    // Alustetaan uusi Game-luokan olion käyttäjän syöttämillä arvoilla
+    // Alustetaan uusi Askare-luokan olion käyttäjän syöttämillä arvoilla
     $askare = new Askare(array(
       'kayttaja_id' => 1,
       'nimi' => $params['nimi'],
@@ -44,7 +44,7 @@ class AskareController extends BaseController {
     // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
     $askare->save();
 
-    // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
+    // Ohjataan käyttäjä lisäyksen jälkeen askareiden esittelysivulle
     Redirect::to('/listaus', array('message' => 'Askare on lisätty kirjastoosi!'));
   }
 }

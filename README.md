@@ -6,18 +6,15 @@ Yleisiä linkkejä:
 
 
 
-* [Linkki sovellukseeni](http://tviivi.users.cs.helsinki.fi/tsoha/)
+* [Linkki sovellukseni askareiden listaussivuun](http://tviivi.users.cs.helsinki.fi/tsoha/)
 
+* [Linkki sovellukseni askareiden lisäyssivuun](http://tviivi.users.cs.helsinki.fi/tsoha/lisays)
+* [Linkki sovellukseni askareiden muokkaussivuun](http://tviivi.users.cs.helsinki.fi/tsoha/muokkaus)
+
+* [Linkki sovellukseni luokkien listaussivuun](http://tviivi.users.cs.helsinki.fi/tsoha/luokat)
+
+* [Linkki sovellukseni kirjautumissivuun](http://tviivi.users.cs.helsinki.fi/tsoha/login)
 * [Linkki dokumentaatiooni](https://github.com/tviivi/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
-
-* [Linkki Bootstrap: tekstin asettelu ja tyylittely](https://getbootstrap.com/docs/3.3/css/)
-
-* [Linkki Bootstrap: taulukot](https://getbootstrap.com/docs/3.3/css/)
-
-* [Linkki Bootstrap: lomakkeet](https://getbootstrap.com/docs/3.3/css/)
-
-* [Linkki Bootstrap: painikkeet](https://getbootstrap.com/docs/3.3/css/)
-
 
 
 ## Työn aihe
