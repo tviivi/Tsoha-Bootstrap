@@ -18,7 +18,6 @@ class Luokka extends BaseModel {
 
         // Käydään kyselyn tuottamat rivit läpi
         foreach ($rows as $row) {
-            // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
             $luokat[] = new Luokka(array(
                 'id' => $row['id'],
                 'nimi' => $row['nimi'],
@@ -39,7 +38,6 @@ class Luokka extends BaseModel {
         'nimi' => $row['nimi'],
         'askare' => $row['askare']
       ));
-
       return $luokka;
     }
     return null;

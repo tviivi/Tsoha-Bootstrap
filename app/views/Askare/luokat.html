@@ -1,40 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Luokat</h1>
+<h1>Luokat</h1>
 
-  <table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered">
     <thead>
-      <tr>
-        <th>Nimi</th>
-        <th>Askareet</th>
-        <th></th>
-      </tr>
+        <tr>
+            <th>Nimi</th>
+            <th>Askareet</th>
+            <th></th>
+        </tr>
     </thead>
 
-    <tbody>
-      <!-- Listataan luokat tähän -->
-      <tr>
+<tbody>
+    <!-- Listataan luokat tähän -->
+    <tr>
         <td>Kotityöt</td>
         <td>Imurointi, tiskaus</td>
         <th><a class="btn btn-default btn-sm" href="#">Poista luokka</a></th>
-      </tr>
-      <tr>
+    </tr>
+    <tr>
         <td>Kouluhommat</td>
         <td>Matikan läksyt</td>
         <th><a class="btn btn-default btn-sm" href="#">Poista luokka</a></th>
-      </tr>
-      
-    </tbody>
-  </table>
-  
-  <h2>Lisää uusi luokka</h2>
-  
-  <div class="form-group">
-      <label>Nimi</label>
-      <input type="text" class="form-control" value="">
-    </div>
-      
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Luo uusi luokka</button>
-    </div>
+    </tr>
+
+</tbody>
+</table>
+
+<h2>Lisää uusi luokka</h2>
+
+<div class="form-group">
+    <label>Nimi</label>
+    <input type="text" class="form-control" value="">
+</div>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">Luo uusi luokka</button>
+</div>
 {% endblock %}

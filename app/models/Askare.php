@@ -19,7 +19,6 @@ class Askare extends BaseModel {
 
         // Käydään kyselyn tuottamat rivit läpi
         foreach ($rows as $row) {
-            // Tämä on PHP:n hassu syntaksi alkion lisäämiseksi taulukkoon :)
             $askareet[] = new Askare(array(
                 'id' => $row['id'],
                 'kayttaja_id' => $row['kayttaja_id'],
@@ -53,9 +52,11 @@ class Askare extends BaseModel {
   }
   public function save(){
     // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
-    $query = DB::connection()->prepare('INSERT INTO Askare (kayttaja_id, nimi, tarkeys_aste, luokka, suoritus) VALUES (:kayttaja_id, :nimi, :tarkeys_aste, :luokka, :suoritus) RETURNING id');
+    $query = DB::connection()->prepare('INSERT INTO Askare (kayttaja_id, nimi, tarkeys_aste, luokka, suoritus) '
+            . 'VALUES (:kayttaja_id, :nimi, :tarkeys_aste, :luokka, :suoritus) RETURNING id');
     // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
-    $query->execute(array('kayttaja_id' => $this->kayttaja_id, 'nimi' => $this->nimi, 'tarkeys_aste' => $this->tarkeys_aste, 'luokka' => $this->luokka, 'suoritus' => $this->suoritus));
+    $query->execute(array('kayttaja_id' => $this->kayttaja_id, 'nimi' => $this->nimi, 'tarkeys_aste' => $this->tarkeys_aste, 
+        'luokka' => $this->luokka, 'suoritus' => $this->suoritus));
     // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
     $row = $query->fetch();
     // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
