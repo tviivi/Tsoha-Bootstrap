@@ -20,5 +20,8 @@ Yleisiä linkkejä:
 ## Työn aihe
 
 
+[Linkki työn aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
+## Sovelluksen Käyttäjätunnukset:
+* käyttäjätunnus: testikäyttäjä
+* salasana: testisalasana
