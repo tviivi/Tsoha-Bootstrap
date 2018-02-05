@@ -1,3 +1,15 @@
-<table class="table table-striped table-bordered">
-    <h1>Tänne tulee jokaista yksittäistä tehtävää koskevaa tekstiä</h1>
-</table>
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>{{askare.nimi}}</h1>
+
+    <div>
+        <p>Tärkeysaste: {{askare.tarkeys_aste}}</p>
+    </div>
+    <div>
+        <p>Luokka: {{askare.luokka}}</p>
+    </div>
+    <div>
+        <p>Status: {{askare.suoritus}}</p>
+    </div>
+{% endblock %}

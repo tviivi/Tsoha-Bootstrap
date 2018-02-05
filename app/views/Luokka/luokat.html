@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Luokat</h1>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nimi</th>
+            <th>Askareet</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for luokka in luokat %}
+        <tr>
+            <td>{{luokka.nimi}}</td>
+            <td>{{luokka.askare}}</td>
+            <td><button type="submit" class="btn btn-warning">Poista askare</button></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<form method="post" action="{{base_path}}/luokkalisatty">
+<h2>Lisää uusi luokka</h2>
+
+<div class="form-group">
+    <label>Nimi</label>
+    <input type="text" name="nimi" class="form-control">
+</div>
+
+<div class="form-group">
+    <label>Askare</label>
+    <input type="text" name="askare" class="form-control">
+</div>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">Luo uusi luokka</button>
+</div>
+</form>
+{% endblock %}
