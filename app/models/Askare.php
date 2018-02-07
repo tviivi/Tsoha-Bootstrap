@@ -64,25 +64,24 @@ class Askare extends BaseModel {
     
     public function update() {
         // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
-        $query = DB::connection()->prepare('UPDATE Askare SET kayttaja_id=:kayttaja_id, nimi=:nimi, tarkeys_aste=:tarkeys_aste, luokka=:luokka, suoritus=:suoritus');
+        $query = DB::connection()->prepare('UPDATE Askare SET kayttaja_id=:kayttaja_id, nimi=:nimi, tarkeys_aste=:tarkeys_aste, luokka=:luokka, suoritus=:suoritus WHERE id=:id RETURNING id');
         // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
-//        $query->execute(array('kayttaja_id' => $this->kayttaja_id, 'nimi' => $this->nimi, 'tarkeys_aste' => $this->tarkeys_aste,
-//            'luokka' => $this->luokka, 'suoritus' => $this->suoritus));
-//        // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
-//        $row = $query->fetch();
-//        // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
-//        $this->id = $row['id'];
+        $query->execute(array('kayttaja_id' => $this->kayttaja_id, 'nimi' => $this->nimi, 'tarkeys_aste' => $this->tarkeys_aste,
+            'luokka' => $this->luokka, 'suoritus' => $this->suoritus, 'id' => $this->id));
+        // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
+        $row = $query->fetch();
+        // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
+        $this->id = $row['id'];
     }
     
     public function delete() {
         // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
-        $query = DB::connection()->prepare('DELETE FROM Askare WHERE kayttaja_id=:kayttaja_id, nimi=:nimi, tarkeys_aste=:tarkeys_aste, luokka=:luokka, suoritus=:suoritus)');
+        $query = DB::connection()->prepare('DELETE FROM Askare WHERE id=:id RETURNING id');
         // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
-//        $query->execute(array('kayttaja_id' => $this->kayttaja_id, 'nimi' => $this->nimi, 'tarkeys_aste' => $this->tarkeys_aste,
-//            'luokka' => $this->luokka, 'suoritus' => $this->suoritus));
-//        // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
-//        $row = $query->fetch();
-//        // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
-//        $this->id = $row['id'];
+        $query->execute(array('id' => $this->id));
+        // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
+        $row = $query->fetch();
+        // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
+        $this->id = $row['id'];
     }
 }

@@ -23,5 +23,5 @@ Yleisiä linkkejä:
 [Linkki työn aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
 
 ## Sovelluksen Käyttäjätunnukset:
-* käyttäjätunnus: testikäyttäjä
-* salasana: testisalasana
+* käyttäjätunnus: Viivi
+* salasana: salasana

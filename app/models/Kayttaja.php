@@ -1,6 +1,6 @@
 <?php
 
-class Luokka extends BaseModel {
+class Kayttaja extends BaseModel {
 
     public $id, $nimi, $password;
 
@@ -8,15 +8,15 @@ class Luokka extends BaseModel {
         parent::__construct($attributes);
     }
 
-    public static function authenticate() {
+    public static function authenticate($nimi, $password) {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi AND password = :password LIMIT 1');
         $query->execute(array('nimi' => $nimi, 'password' => $password));
         $row = $query->fetch();
         if ($row) {
             $kayttaja = new Kayttaja(array(
-                'id' => row[$id],
-                'nimi' => row[$nimi],
-                'password' => row[$password]
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'password' => $row['password']
             ));
             return $kayttaja;
         } else {

@@ -38,7 +38,6 @@ class AskareController extends BaseController {
             'luokka' => $params['luokka'],
             'suoritus' => $params['suoritus']
         );
-        // Alustetaan Game-olio käyttäjän syöttämillä tiedoilla
         $askare = new Askare($attributes);
         $askare->update();
         Redirect::to('/listaus');

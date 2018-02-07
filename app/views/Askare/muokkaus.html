@@ -2,7 +2,7 @@
 {% block content %}
   <h1>Muokkaa luotua askaretta "{{askare.nimi}}"</h1>
 
-  <form method="post" action="{{base_path}}/askare/:id/edit">
+  <form method="post" action="{{base_path}}/askare/{{askare.id}}/edit">
       
       <div class="form-group">
         <label>Kayttajan id</label>
