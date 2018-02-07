@@ -6,17 +6,15 @@
     <thead>
         <tr>
             <th>Nimi</th>
-            <th>Askareet</th>
+            <th>Askare</th>
         </tr>
     </thead>
-
     <tbody>
         {% for luokka in luokat %}
         <tr>
-            <td>{{luokka.nimi}}</td>
+            <td><a href="{{base_path}}/luokka/{{luokka.id}}">{{luokka.nimi}}</td>
             <td>{{luokka.askare}}</td>
-            <td><button type="submit" class="btn btn-warning">Poista askare</button></td>
-        </tr>
+            </tr>
         {% endfor %}
     </tbody>
 </table>

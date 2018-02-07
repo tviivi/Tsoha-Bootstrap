@@ -29,4 +29,37 @@ class LuokkaController extends BaseController {
             View::make('Luokka/luokat.html', array('luokat' => $luokat), array('error' => 'Nimessä oli virhe!'));
         }
     }
+    
+    public static function yksittainenluokka($id) {
+        $luokka = Luokka::find($id);
+        View::make('Luokka/yksittainenluokka.html', array('luokka' => $luokka));
+    }
+    
+        public static function paivita($id) {
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+            'nimi' => $params['nimi'],
+            'askare' => $params['askare']
+        );
+        $luokka = new Luokka($attributes);
+        $luokka->update();
+        Redirect::to('/luokat');
+    }
+    
+    public static function poista($id) {
+    // Alustetaan Game-olio annetulla id:llä
+    $luokka = new Luokka(array('id' => $id));
+    // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
+    $luokka->delete();
+
+    // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
+    Redirect::to('/luokat', array('message' => 'Luokka on poistettu onnistuneesti!'));
+  }
+  
+  public static function muokkaus($id) {
+        $luokka = Luokka::find($id);
+        View::make('Luokka/luokkamuokkaus.html', array('luokka' => $luokka));
+    }
 }

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>{{luokka.nimi}}</h1>
+    <p>plöplöplöplö</p>
+    
+    <div><a class="btn btn-default btn-sm" href="{{base_path}}/luokka/{{luokka.id}}/edit">Muokkaa luokkaa</a></div>
+    
+    
+    
+<form method="post" action="{{base_path}}/luokka/{{luokka.id}}/destroy" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista luokka</button> 
+</form>
+    
+{% endblock %}

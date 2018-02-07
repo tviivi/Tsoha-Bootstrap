@@ -72,7 +72,7 @@ class AskareController extends BaseController {
             View::make('Askare/lisays.html', array('error' => 'Nimessä oli virhe!'));
         }
 
-        if (($params['tarkeys_aste'] != '') && (($params['tarkeys_aste']) > 0 || ($params['tarkeys_aste']) < 6)) {
+        if (($params['tarkeys_aste'] != '') && ($params['tarkeys_aste'] > 0) && ($params['tarkeys_aste'] < 6)) {
             $askare->save();
             Redirect::to('/listaus', array('message' => 'Askare on lisätty muistilistaasi!'));
         } else {
