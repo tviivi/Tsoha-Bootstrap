@@ -3,6 +3,7 @@
 class LuokkaController extends BaseController {
 
     public static function index() {
+        self::check_logged_in();
         // Haetaan kaikki luokat tietokannasta
         $luokat = Luokka::all();
         // Renderöidään views/Askare kansiossa sijaitseva tiedosto luokat.html muuttujan $luokka datalla
@@ -10,6 +11,7 @@ class LuokkaController extends BaseController {
     }
 
     public static function store() {
+        self::check_logged_in();
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
         // Alustetaan uusi Askare-luokan olion käyttäjän syöttämillä arvoilla
@@ -29,13 +31,15 @@ class LuokkaController extends BaseController {
             View::make('Luokka/luokat.html', array('luokat' => $luokat), array('error' => 'Nimessä oli virhe!'));
         }
     }
-    
+
     public static function yksittainenluokka($id) {
+        self::check_logged_in();
         $luokka = Luokka::find($id);
         View::make('Luokka/yksittainenluokka.html', array('luokka' => $luokka));
     }
-    
-        public static function paivita($id) {
+
+    public static function paivita($id) {
+        self::check_logged_in();
         $params = $_POST;
 
         $attributes = array(
@@ -47,19 +51,22 @@ class LuokkaController extends BaseController {
         $luokka->update();
         Redirect::to('/luokat');
     }
-    
-    public static function poista($id) {
-    // Alustetaan Game-olio annetulla id:llä
-    $luokka = new Luokka(array('id' => $id));
-    // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
-    $luokka->delete();
 
-    // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
-    Redirect::to('/luokat', array('message' => 'Luokka on poistettu onnistuneesti!'));
-  }
-  
-  public static function muokkaus($id) {
+    public static function poista($id) {
+        self::check_logged_in();
+        // Alustetaan Game-olio annetulla id:llä
+        $luokka = new Luokka(array('id' => $id));
+        // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
+        $luokka->delete();
+
+        // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
+        Redirect::to('/luokat', array('message' => 'Luokka on poistettu onnistuneesti!'));
+    }
+
+    public static function muokkaus($id) {
+        self::check_logged_in();
         $luokka = Luokka::find($id);
         View::make('Luokka/luokkamuokkaus.html', array('luokka' => $luokka));
     }
+
 }

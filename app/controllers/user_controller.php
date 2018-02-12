@@ -14,11 +14,10 @@ class UserController extends BaseController {
             View::make('Kayttaja/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'nimi' => $params['nimi']));
         } else {
             $_SESSION['kayttaja'] = $kayttaja->id;
-
             Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $kayttaja->nimi . '!'));
         }
     }
-    
+
     public static function store() {
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
@@ -38,4 +37,10 @@ class UserController extends BaseController {
             View::make('Kayttaja/login.html', array('kayttaja' => $kayttaja), array('error' => 'Rekisteröitymisessä tapahtui virhe!'));
         }
     }
+
+    public static function logout() {
+        $_SESSION['kayttaja'] = null;
+        Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
+    }
+
 }

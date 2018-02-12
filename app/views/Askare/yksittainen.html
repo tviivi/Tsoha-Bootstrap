@@ -10,6 +10,12 @@
         <p>Luokka: {{askare.luokka}}</p>
     </div>
     <div>
-        <p>Status: {{askare.suoritus}}</p>
+        <p>Status: {% if askare.suoritus == 'valmis' %}
+                <label class="label label-success">valmis
+                {% else %}
+                <label class="label label-danger">kesken
+                {% endif %}</p>
     </div>
+    
+    <a class="btn btn-primary" href="{{base_path}}/askare/{{askare.id}}/edit">Muokkaa askaretta</a>
 {% endblock %}
