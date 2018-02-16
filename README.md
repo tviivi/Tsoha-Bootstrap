@@ -12,4 +12,4 @@
 ## Sovelluksen käyttäjätunnukset:
 * käyttäjätunnus: testikäyttäjä
 * salasana: testisalasana
-###(Sovellukseen voi myös rekisteröityä)
+(Sovellukseen voi myös rekisteröityä)
