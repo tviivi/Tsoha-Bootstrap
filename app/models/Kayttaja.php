@@ -1,10 +1,16 @@
 <?php
 
 class Kayttaja extends BaseModel {
-    public $id, $nimi, $password;
 
-    public function __construct($attributes) {
-        parent::__construct($attributes);
+    public $id, $nimi, $password, $validators;
+
+    public function __construct($attributes = null) {
+        foreach ($attributes as $attribute => $value) {
+            if (property_exists($this, $attribute)) {
+                $this->{$attribute} = $value;
+            }
+        }
+        $this->validators = array('validoi_nimi');
     }
 
     public static function authenticate($nimi, $password) {
@@ -22,6 +28,7 @@ class Kayttaja extends BaseModel {
             return null;
         }
     }
+
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -37,11 +44,23 @@ class Kayttaja extends BaseModel {
         }
         return null;
     }
+
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, password) VALUES (:nimi, :password) RETURNING id');
+        $query->execute(array('nimi' => $this->nimi, 'password' => $this->password));
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
+
+    public function validoi_nimi() {
+        $errors = array();
+        $errors = $this->validoi_string($this->nimi);
+        return $errors;
+    }
     
-    public function save(){
-    $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, password) VALUES (:nimi, :password) RETURNING id');
-    $query->execute(array('nimi' => $this->nimi, 'password' => $this->password));
-    $row = $query->fetch();
-    $this->id = $row['id'];
-  }
+    public function validoi_salasana() {
+        $errors = array();
+        $errors = $this->validoi_password($this->password);
+        return $errors;
+    }
 }

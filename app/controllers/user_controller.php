@@ -24,15 +24,13 @@ class UserController extends BaseController {
             'nimi' => $params['nimi'],
             'password' => $params['password']
         ));
-        if ($params['nimi'] != '' && strlen($params['nimi']) >= 3) {
+        $errors = $kayttaja->errors();
+        
+        if (count($errors) == 0) {
             $kayttaja->save();
-            Redirect::to('/login', array('message' => 'Uusi käyttäjä lisätty!'));
-        }
-        if ($params['password'] != '' && strlen($params['password']) >= 3) {
-            $kayttaja->save();
-            Redirect::to('/login', array('message' => 'Uusi käyttäjä lisätty!'));
+            Redirect::to('/login');
         } else {
-            View::make('Kayttaja/login.html', array('kayttaja' => $kayttaja), array('error' => 'Rekisteröitymisessä tapahtui virhe!'));
+            View::make('Kayttaja/login.html', array('errors' => $errors, 'message' => 'Virhe rekisteröitymisessä!'));
         }
     }
 

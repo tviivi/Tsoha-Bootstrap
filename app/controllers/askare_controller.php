@@ -24,7 +24,7 @@ class AskareController extends BaseController {
         self::check_logged_in();
         $luokat = Luokka::all();
         $askare = Askare::find($id);
-        View::make('Askare/muokkaus.html', array('askare' => $askare), array('luokat' => $luokat));
+        View::make('Askare/muokkaus.html', array('askare' => $askare, 'luokat' => $luokat));
     }
 
     public static function yksittainen($id) {
@@ -46,44 +46,14 @@ class AskareController extends BaseController {
             'suoritus' => $params['suoritus']
         );
         $askare = new Askare($attributes);
+        $errors = $askare->errors();
         
-        if ($params['nimi'] != '') {
+        if (count($errors) == 0) {
             $askare->update();
-            Redirect::to('/listaus', array('message' => 'Askaretta on muokattu onnistuneesti!'));
+            Redirect::to('/listaus');
         } else {
-            View::make('Askare/muokkaus.html', array('error' => 'Nimessä oli virhe!'));
+            View::make('Askare/muokkaus.html', array('errors' => $errors, 'message' => 'Virhe muokatessa!'));
         }
-        if (($params['tarkeys_aste'] != null) && ($params['tarkeys_aste'] > 0) && ($params['tarkeys_aste'] < 6)) {
-            $askare->update();
-            Redirect::to('/listaus', array('message' => 'Askaretta on muokattu onnistuneesti!'));
-        } else {
-            View::make('Askare/muokkaus.html', array('error' => 'Tärkeysasteessa oli virhe!'));
-        }
-        if ($params['kayttaja_id'] != null){
-            $askare->update();
-            Redirect::to('/listaus', array('message' => 'Askaretta on muokattu onnistuneesti!'));
-        } else {
-            View::make('Askare/muokkaus.html', array('error' => 'ID:ssä oli virhe!'));
-        }
-        if ($params['luokka'] != '') {
-            $askare->update();
-            Redirect::to('/listaus', array('message' => 'Askaretta on muokattu onnistuneesti!'));
-        } else {
-            View::make('Askare/muokkaus.html', array('error' => 'Luokassa oli virhe!'));
-        }
-        if ($params['suoritus'] != '' && ($params['suoritus'] === 'kesken' || $params['suoritus'] === 'valmis')) {
-            $askare->update();
-            Redirect::to('/listaus', array('message' => 'Askaretta on muokattu onnistuneesti!'));
-        } else {
-            View::make('Askare/muokkaus.html', array('error' => 'Suorituksessa oli virhe!'));
-        }
-    }
-
-    public static function poista($id) {
-        self::check_logged_in();
-        $askare = new Askare(array('id' => $id));
-        $askare->delete();
-        Redirect::to('/listaus', array('message' => 'Askare on poistettu onnistuneesti!'));
     }
 
     public static function store() {
@@ -96,36 +66,20 @@ class AskareController extends BaseController {
             'luokka' => $params['luokka'],
             'suoritus' => $params['suoritus']
         ));
-
-        if ($params['nimi'] != '') {
+        $errors = $askare->errors();
+        
+        if (count($errors) == 0) {
             $askare->save();
-            Redirect::to('/listaus', array('message' => 'Askare on lisätty muistilistaasi!'));
+            Redirect::to('/listaus');
         } else {
-            View::make('Askare/lisays.html', array('error' => 'Nimessä oli virhe!'));
+            View::make('Askare/lisays.html', array('errors' => $errors, 'message' => 'Virhe lisätessä!'));
         }
-        if (($params['tarkeys_aste'] != null) && ($params['tarkeys_aste'] > 0) && ($params['tarkeys_aste'] < 6)) {
-            $askare->save();
-            Redirect::to('/listaus', array('message' => 'Askare on lisätty muistilistaasi!'));
-        } else {
-            View::make('Askare/lisays.html', array('error' => 'Tärkeysasteessa oli virhe!'));
-        }
-        if ($params['kayttaja_id'] != null){
-            $askare->save();
-            Redirect::to('/listaus', array('message' => 'Askare on lisätty muistilistaasi!'));
-        } else {
-            View::make('Askare/lisays.html', array('error' => 'ID:ssä oli virhe!'));
-        }
-        if ($params['luokka'] != '') {
-            $askare->save();
-            Redirect::to('/listaus', array('message' => 'Askare on lisätty muistilistaasi!'));
-        } else {
-            View::make('Askare/lisays.html', array('error' => 'Luokassa oli virhe!'));
-        }
-        if ($params['suoritus'] != '' && ($params['suoritus'] === 'kesken' || $params['suoritus'] === 'valmis')) {
-            $askare->save();
-            Redirect::to('/listaus', array('message' => 'Askare on lisätty muistilistaasi!'));
-        } else {
-            View::make('Askare/lisays.html', array('error' => 'Suorituksessa oli virhe!'));
-        }
+    }
+    
+    public static function poista($id) {
+        self::check_logged_in();
+        $askare = new Askare(array('id' => $id));
+        $askare->delete();
+        Redirect::to('/listaus', array('message' => 'Askare on poistettu onnistuneesti!'));
     }
 }

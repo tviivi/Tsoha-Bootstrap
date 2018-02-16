@@ -1,10 +1,15 @@
 <?php
 
 class Luokka extends BaseModel {
-    public $id, $nimi, $askare;
+    public $id, $nimi, $askare, $validators;
     
-    public function __construct($attributes) {
-        parent::__construct($attributes);
+    public function __construct($attributes = null) {
+        foreach ($attributes as $attribute => $value) {
+            if (property_exists($this, $attribute)) {
+                $this->{$attribute} = $value;
+            }
+        }
+        $this->validators = array('validoi_nimi');
     }
 
     public static function all() {
@@ -57,5 +62,11 @@ class Luokka extends BaseModel {
         $query->execute(array('id' => $this->id));
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+    
+    public function validoi_nimi() {
+        $errors = array();
+        $errors = $this->validoi_string($this->nimi);
+        return $errors;
     }
 }
