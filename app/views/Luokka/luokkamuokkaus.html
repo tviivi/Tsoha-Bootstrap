@@ -1,22 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+
   <h1>Muokkaa luokkaa "{{luokka.nimi}}"</h1>
 
   <form method="post" action="{{base_path}}/luokka/{{luokka.id}}/edit">
       
       <div class="form-group">
-        <label>ID</label>
-        <input type="number" name="id" class="form-control" placeholder={{luokka.id}}>
+        <input type="hidden" name="id" value="{{luokka.id}}">
     </div>
       
     <div class="form-group">
       <label>Nimi</label>
-      <input type="text" name="nimi" class="form-control" placeholder={{luokka.nimi}}>
-    </div>
-      
-    <div class="form-group">
-      <label>Askareet</label>
-      <input type="text" name="askare" class="form-control" placeholder={{luokka.askare}}>
+      <input type="text" name="nimi" class="form-control" value="{{luokka.nimi}}">
     </div>
 
     <div class="form-group">

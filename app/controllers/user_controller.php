@@ -19,9 +19,7 @@ class UserController extends BaseController {
     }
 
     public static function store() {
-        // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
-        // Alustetaan uusi Askare-luokan olion käyttäjän syöttämillä arvoilla
         $kayttaja = new Kayttaja(array(
             'nimi' => $params['nimi'],
             'password' => $params['password']

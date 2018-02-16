@@ -4,31 +4,30 @@ class LuokkaController extends BaseController {
 
     public static function index() {
         self::check_logged_in();
-        // Haetaan kaikki luokat tietokannasta
         $luokat = Luokka::all();
-        // Renderöidään views/Askare kansiossa sijaitseva tiedosto luokat.html muuttujan $luokka datalla
         View::make('Luokka/luokat.html', array('luokat' => $luokat));
     }
 
     public static function store() {
         self::check_logged_in();
-        // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
-        // Alustetaan uusi Askare-luokan olion käyttäjän syöttämillä arvoilla
         $luokka = new Luokka(array(
             'nimi' => $params['nimi'],
             'askare' => $params['askare']
         ));
-        if ($params['nimi'] != '' && strlen($params['nimi']) >= 3) {
+        if ($params['nimi'] != '') {
             $luokka->save();
             Redirect::to('/luokat', array('message' => 'Uusi luokka lisätty!'));
+        } else {
+            $luokat = Luokka::all();
+            View::make('Luokka/luokat.html', array('luokat' => $luokat), array('error' => 'Nimessä oli virhe!'));
         }
         if ($params['askare'] != '' && strlen($params['askare']) >= 3) {
             $luokka->save();
             Redirect::to('/luokat', array('message' => 'Uusi luokka lisätty!'));
         } else {
             $luokat = Luokka::all();
-            View::make('Luokka/luokat.html', array('luokat' => $luokat), array('error' => 'Nimessä oli virhe!'));
+            View::make('Luokka/luokat.html', array('luokat' => $luokat), array('error' => 'Askareessa oli virhe!'));
         }
     }
 
@@ -48,18 +47,27 @@ class LuokkaController extends BaseController {
             'askare' => $params['askare']
         );
         $luokka = new Luokka($attributes);
-        $luokka->update();
-        Redirect::to('/luokat');
+        
+        if ($params['nimi'] != '') {
+            $luokka->update();
+            Redirect::to('/luokat', array('message' => 'Luokkaa on muokattu onnistuneesti!'));
+        } else {
+            $luokat = Luokka::all();
+            View::make('Luokka/luokkamuokkaus.html', array('luokat' => $luokat), array('error' => 'Nimessä oli virhe!'));
+        }
+        if ($params['askare'] != '' && strlen($params['askare']) >= 3) {
+            $luokka->update();
+            Redirect::to('/luokat', array('message' => 'Luokkaa on muokattu onnistuneesti!'));
+        } else {
+            $luokat = Luokka::all();
+            View::make('Luokka/luokkamuokkaus.html', array('luokat' => $luokat), array('error' => 'Askareessa oli virhe!'));
+        }
     }
 
     public static function poista($id) {
         self::check_logged_in();
-        // Alustetaan Game-olio annetulla id:llä
         $luokka = new Luokka(array('id' => $id));
-        // Kutsutaan Game-malliluokan metodia destroy, joka poistaa pelin sen id:llä
         $luokka->delete();
-
-        // Ohjataan käyttäjä pelien listaussivulle ilmoituksen kera
         Redirect::to('/luokat', array('message' => 'Luokka on poistettu onnistuneesti!'));
     }
 

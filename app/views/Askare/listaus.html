@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+
 {% if user_logged_in %}
-    <h1>Käyttäjän "{{user_logged_in.nimi}}" muistilista (ID: {{user_logged_in.id}})</h1>
-  {% endif %}
+<h1>Käyttäjän "{{user_logged_in.nimi}}" muistilista <small>(ID: {{user_logged_in.id}})</small></h1>
+{% endif %}
 
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>Askare</th>
             <th>Tärkeysaste</th>
-            <th>Luokka</th>
             <th>Status</th>
             <th>Muokkaus</th>
         </tr>
@@ -20,13 +20,12 @@
         <tr>
             <td><a href="{{base_path}}/askare/{{askare.id}}">{{askare.nimi}}</td>
             <td>{{askare.tarkeys_aste}}</td>
-            <td>{{askare.luokka}}</td>
             <td>
                 {% if askare.suoritus == 'valmis'%}
                 <label class="label label-success">valmis
-                {% else %}
-                <label class="label label-danger">kesken
-                {% endif %}
+                    {% else %}
+                    <label class="label label-danger">kesken
+                        {% endif %}
             </td>
             <td><a class="btn btn-default btn-sm" href="{{base_path}}/askare/{{askare.id}}/edit">Muokkaa askaretta</a></td>
         </tr>
@@ -34,7 +33,5 @@
     </tbody>
 </table>
 
-<p>
-    <a href="{{base_path}}/lisays" class="btn btn-success">Lisää uusi askare</a>
-</p>
+<p><a href="{{base_path}}/lisays" class="btn btn-success">Lisää uusi askare</a></p>
 {% endblock %}

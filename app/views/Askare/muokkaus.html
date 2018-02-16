@@ -1,32 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
+
 <h1>Muokkaa luotua askaretta "{{askare.nimi}}"</h1>
 
 <form method="post" action="{{base_path}}/askare/{{askare.id}}/edit">
 
     <div class="form-group">
-        <label>Kayttajan id</label>
-        <input type="number" name="kayttaja_id" class="form-control" placeholder={{askare.kayttaja_id}}>
+        <input type="hidden" name="kayttaja_id" value="{{user_logged_in.id}}">
     </div>
 
     <div class="form-group">
         <label>Askare</label>
-        <input type="text" name="nimi" class="form-control" placeholder={{askare.nimi}}>
+        <input type="text" name="nimi" class="form-control" value="{{askare.nimi}}">
     </div>
 
     <div class="form-group">
         <label>Tärkeysaste</label>
-        <input type="number" name="tarkeys_aste" class="form-control" placeholder={{askare.tarkeys_aste}}>
+        <input type="number" name="tarkeys_aste" class="form-control" value="{{askare.tarkeys_aste}}">
     </div>
 
     <div class="form-group">
         <label>Luokka</label>
-        <input type="text" name="luokka" class="form-control" placeholder={{askare.luokka}}>
+        <select class="form-control" name="luokka">
+            {% for luokka in luokat %}
+            <option value="{{luokka.nimi}}">{{luokka.nimi}}</option>
+            {% endfor %}
+        </select>
+        <!--Tässä pitäisi toteutua askareen lisäyksessä toimiva luokkalistaus, mutta jostain syystä se ei toimi,
+        joten siksi hidden-tyyppinen value, jotta muokkaus toimisi edes jollain tasolla-->
+        <input type="hidden" name="luokka" value="{{askare.luokka}}">
     </div>
 
     <div class="form-group">
         <label>Suoritus (kesken/valmis)</label>
-        <input type="text" name="suoritus" class="form-control" placeholder={{askare.suoritus}}>
+        <input type="text" name="suoritus" class="form-control" value="{{askare.suoritus}}">
     </div>
 
     <div class="form-group">

@@ -49,32 +49,26 @@ $routes->get('/luokka/:id', function($id) {
 });
 
 $routes->get('/askare/:id/edit', function($id) {
-    // Askareen muokkauslomakkeen esittäminen
     AskareController::muokkaus($id);
 });
 
 $routes->get('/luokka/:id/edit', function($id) {
-    // Askareen muokkauslomakkeen esittäminen
     LuokkaController::muokkaus($id);
 });
 
 $routes->post('/askare/:id/edit', function($id) {
-    // Askareen muokkaaminen
     AskareController::paivita($id);
 });
 
 $routes->post('/luokka/:id/edit', function($id) {
-    // Askareen muokkaaminen
     LuokkaController::paivita($id);
 });
 
 $routes->post('/askare/:id/destroy', function($id) {
-    // Pelin poisto
     AskareController::poista($id);
 });
 
 $routes->post('/luokka/:id/destroy', function($id) {
-    // Pelin poisto
     LuokkaController::poista($id);
 });
 
