@@ -51,5 +51,6 @@
         if ($string == '' || $string == NULL) {
             $errors[] = 'Salasanan tulee olla epätyhjä';
         }
+        return $errors;
     }
   }

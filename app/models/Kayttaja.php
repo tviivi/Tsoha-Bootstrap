@@ -10,7 +10,7 @@ class Kayttaja extends BaseModel {
                 $this->{$attribute} = $value;
             }
         }
-        $this->validators = array('validoi_nimi');
+        $this->validators = array('validoi_nimi', 'validoi_salasana');
     }
 
     public static function authenticate($nimi, $password) {
