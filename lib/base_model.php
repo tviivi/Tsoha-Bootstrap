@@ -37,7 +37,7 @@
     
     public function validoi_integer($integer) {
         $errors = array();
-        if (!($integer < 1 || $integer > 5)) {
+        if (($integer < 1 || $integer > 5)) {
             $errors[] = 'Tärkeysasteen tulee olla väliltä 1...5';
         }
         if ($integer == '' || $integer == NULL) {
