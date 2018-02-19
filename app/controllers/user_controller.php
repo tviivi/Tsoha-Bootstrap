@@ -30,13 +30,12 @@ class UserController extends BaseController {
             $kayttaja->save();
             Redirect::to('/login');
         } else {
-            View::make('Kayttaja/login.html', array('errors' => $errors, 'message' => 'Virhe rekisteröitymisessä!'));
+            View::make('Kayttaja/login.html');
         }
     }
 
     public static function logout() {
         $_SESSION['kayttaja'] = null;
-        Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
+        Redirect::to('/login');
     }
-
 }

@@ -47,12 +47,13 @@ class AskareController extends BaseController {
         );
         $askare = new Askare($attributes);
         $errors = $askare->errors();
+        $luokat = Luokka::all();
         
         if (count($errors) == 0) {
             $askare->update();
             Redirect::to('/listaus');
         } else {
-            View::make('Askare/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('Askare/muokkaus.html', array('luokat' => $luokat, 'errors' => $errors, 'attributes' => $attributes));
         }
     }
 
@@ -67,12 +68,13 @@ class AskareController extends BaseController {
             'suoritus' => $params['suoritus']
         ));
         $errors = $askare->errors();
+        $luokat = Luokka::all();
         
         if (count($errors) == 0) {
             $askare->save();
             Redirect::to('/listaus');
         } else {
-            View::make('Askare/lisays.html', array('errors' => $errors, 'message' => 'Virhe lisätessä!'));
+            View::make('Askare/lisays.html', array('luokat' => $luokat, 'askare' => $askare, 'errors' => $errors));
         }
     }
     
@@ -80,6 +82,6 @@ class AskareController extends BaseController {
         self::check_logged_in();
         $askare = new Askare(array('id' => $id));
         $askare->delete();
-        Redirect::to('/listaus', array('message' => 'Askare on poistettu onnistuneesti!'));
+        Redirect::to('/listaus');
     }
 }

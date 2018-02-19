@@ -13,7 +13,7 @@ class Luokka extends BaseModel {
     }
 
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Luokka');
+        $query = DB::connection()->prepare('SELECT * FROM Luokka ORDER BY nimi');
         $query->execute();
         $rows = $query->fetchAll();
         $luokat = array();

@@ -16,12 +16,13 @@ class LuokkaController extends BaseController {
             'askare' => $params['askare']
         ));
         $errors = $luokka->errors();
+        $luokat = Luokka::all();
         
         if (count($errors) == 0) {
             $luokka->save();
             Redirect::to('/luokat');
         } else {
-            View::make('Luokka/luokat.html', array('errors' => $errors, 'message' => 'Virhe lisätessä!'));
+            View::make('Luokka/luokat.html', array('luokat' => $luokat, 'errors' => $errors));
         }
     }
 
@@ -42,12 +43,13 @@ class LuokkaController extends BaseController {
         );
         $luokka = new Luokka($attributes);
         $errors = $luokka->errors();
+        $alkuperainen = Luokka::find($id);
         
         if (count($errors) == 0) {
             $luokka->update();
             Redirect::to('/luokat');
         } else {
-            View::make('Luokka/luokkamuokkaus.html', array('attributes' => $attributes, 'errors' => $errors, 'message' => 'Virhe muokatessa!'));
+            View::make('Luokka/luokkamuokkaus.html', array('errors' => $errors, 'luokka' => $alkuperainen));
         }
     }
 
@@ -55,7 +57,7 @@ class LuokkaController extends BaseController {
         self::check_logged_in();
         $luokka = new Luokka(array('id' => $id));
         $luokka->delete();
-        Redirect::to('/luokat', array('message' => 'Luokka on poistettu onnistuneesti!'));
+        Redirect::to('/luokat');
     }
 
     public static function muokkaus($id) {
