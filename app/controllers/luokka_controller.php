@@ -37,7 +37,8 @@ class LuokkaController extends BaseController {
 
         $attributes = array(
             'id' => $id,
-            'nimi' => $params['nimi']
+            'nimi' => $params['nimi'],
+            'askare' => $params['askare']
         );
         $luokka = new Luokka($attributes);
         $errors = $luokka->errors();
