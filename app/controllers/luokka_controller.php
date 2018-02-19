@@ -18,7 +18,7 @@ class LuokkaController extends BaseController {
         $errors = $luokka->errors();
         
         if (count($errors) == 0) {
-            $luokka->update();
+            $luokka->save();
             Redirect::to('/luokat');
         } else {
             View::make('Luokka/luokat.html', array('errors' => $errors, 'message' => 'Virhe lisätessä!'));
@@ -46,7 +46,7 @@ class LuokkaController extends BaseController {
             $luokka->update();
             Redirect::to('/luokat');
         } else {
-            View::make('Luokka/luokkamuokkaus.html', array('errors' => $errors, 'message' => 'Virhe muokatessa!'));
+            View::make('Luokka/luokkamuokkaus.html', array('attributes' => $attributes, 'errors' => $errors, 'message' => 'Virhe muokatessa!'));
         }
     }
 
@@ -62,5 +62,4 @@ class LuokkaController extends BaseController {
         $luokka = Luokka::find($id);
         View::make('Luokka/luokkamuokkaus.html', array('luokka' => $luokka));
     }
-
 }

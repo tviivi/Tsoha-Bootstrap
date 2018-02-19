@@ -11,21 +11,25 @@
 </div>
 {% endif %}
 
-  <h1>Muokkaa luokkaa "{{luokka.nimi}}"</h1>
+<h1>Muokkaa luokkaa "{{luokka.nimi}}"</h1>
 
-  <form method="post" action="{{base_path}}/luokka/{{luokka.id}}/edit">
-      
-      <div class="form-group">
+<form method="post" action="{{base_path}}/luokka/{{luokka.id}}/edit">
+
+    <div class="form-group">
         <input type="hidden" name="id" value="{{luokka.id}}">
     </div>
-      
+
     <div class="form-group">
-      <label>Nimi</label>
-      <input type="text" name="nimi" class="form-control" value="{{luokka.nimi}}">
+        <label>Nimi</label>
+        <input type="text" name="nimi" class="form-control" value="{{luokka.nimi}}">
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
+        <input type="hidden" name="askare" value="x">
     </div>
-  </form>
-  {% endblock %}
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+</form>
+{% endblock %}

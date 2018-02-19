@@ -11,9 +11,9 @@
 </div>
 {% endif %}
 
-<h1>Muokkaa luotua askaretta "{{askare.nimi}}"</h1>
+<h1>Muokkaa luotua askaretta "{{attributes.nimi}}"</h1>
 
-<form method="post" action="{{base_path}}/askare/{{askare.id}}/edit">
+<form method="post" action="{{base_path}}/askare/{{attributes.id}}/edit">
 
     <div class="form-group">
         <input type="hidden" name="kayttaja_id" value="{{user_logged_in.id}}">
@@ -21,12 +21,12 @@
 
     <div class="form-group">
         <label>Askare</label>
-        <input type="text" name="nimi" class="form-control" value="{{askare.nimi}}">
+        <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
     </div>
 
     <div class="form-group">
         <label>Tärkeysaste</label>
-        <input type="number" name="tarkeys_aste" class="form-control" value="{{askare.tarkeys_aste}}">
+        <input type="number" name="tarkeys_aste" class="form-control" value="{{attributes.tarkeys_aste}}">
     </div>
 
     <div class="form-group">
@@ -40,7 +40,7 @@
 
     <div class="form-group">
         <label>Suoritus (kesken/valmis)</label>
-        <input type="text" name="suoritus" class="form-control" value="{{askare.suoritus}}">
+        <input type="text" name="suoritus" class="form-control" value="{{attributes.suoritus}}">
     </div>
 
     <div class="form-group">

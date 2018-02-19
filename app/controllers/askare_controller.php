@@ -24,7 +24,7 @@ class AskareController extends BaseController {
         self::check_logged_in();
         $luokat = Luokka::all();
         $askare = Askare::find($id);
-        View::make('Askare/muokkaus.html', array('askare' => $askare, 'luokat' => $luokat));
+        View::make('Askare/muokkaus.html', array('attributes' => $askare, 'luokat' => $luokat));
     }
 
     public static function yksittainen($id) {
@@ -52,7 +52,7 @@ class AskareController extends BaseController {
             $askare->update();
             Redirect::to('/listaus');
         } else {
-            View::make('Askare/muokkaus.html', array('errors' => $errors, 'message' => 'Virhe muokatessa!'));
+            View::make('Askare/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
