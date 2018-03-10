@@ -92,5 +92,4 @@ class Askare extends BaseModel {
         $errors = $this->validoi_integer($this->tarkeys_aste);
         return $errors;
     }
-
 }

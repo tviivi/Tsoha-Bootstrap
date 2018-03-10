@@ -24,6 +24,9 @@
         if ($string == '' || $string == NULL) {
             $errors[] = 'Nimen tulee olla epätyhjä';
         }
+        if (strlen($string) >= 20) {
+            $errors[] = 'Nimen tulee olla korkeintaan 20 merkkiä pitkä';
+        }
         return $errors;
     }
     
@@ -37,8 +40,8 @@
     
     public function validoi_integer($integer) {
         $errors = array();
-        if (($integer < 1 || $integer > 5)) {
-            $errors[] = 'Tärkeysasteen tulee olla väliltä 1...5';
+        if (($integer != 1 && $integer != 2 && $integer != 3 && $integer != 4 && $integer != 5)) {
+            $errors[] = 'Tärkeysasteen tulee olla kokonaisluku väliltä 1...5';
         }
         if ($integer == '' || $integer == NULL) {
             $errors[] = 'Tärkeysasteen tulee olla epätyhjä';
@@ -50,6 +53,9 @@
         $errors = array();
         if ($string == '' || $string == NULL) {
             $errors[] = 'Salasanan tulee olla epätyhjä';
+        }
+        if (strlen($string) > 50) {
+            $errors[] = 'Salasanan tulee olla korkeintaan 50 merkkiä pitkä';
         }
         return $errors;
     }

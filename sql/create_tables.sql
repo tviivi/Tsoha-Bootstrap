@@ -1,13 +1,13 @@
 -- Lisää CREATE TABLE lauseet tähän tiedostoon
 CREATE TABLE Kayttaja(
-  id SERIAL PRIMARY KEY, -- SERIAL tyyppinen pääavain pitää huolen, että tauluun lisätyllä rivillä on aina uniikki pääavain. Kätevää!
-  nimi varchar(20) NOT NULL, -- Muista erottaa sarakkeiden määrittelyt pilkulla!
+  id SERIAL PRIMARY KEY,
+  nimi varchar(20) NOT NULL,
   password varchar(50) NOT NULL
 );
 
 CREATE TABLE Askare(
   id SERIAL PRIMARY KEY,
-  kayttaja_id INTEGER REFERENCES kayttaja(id), -- Viiteavain Player-tauluun
+  kayttaja_id INTEGER REFERENCES kayttaja(id),
   nimi varchar(20) NOT NULL,
   tarkeys_aste INTEGER NOT NULL,
   luokka varchar(20) NOT NULL,
